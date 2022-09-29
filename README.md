@@ -1,5 +1,7 @@
 # WebServer
 
+Tarefa desenvolvida na disciplina de redes pelo professor Marcos Courino no curso Análise e desenvolvimento de Sistemas no IFRS.
+
 Nesta tarefa, foi desenvolvido um servidor Web simples em Python, capaz de processar apenas uma requisicao. O servidor Web cria um socket de conexão quando contatado por um cliente (navegador); 
 Recebe a requisição HTTP dessa conexão; Analisa a requisição para determinar o arquivo específico sendo requisitado;
 Obtém o arquivo requisitado do sistema de arquivo do servidor; 
