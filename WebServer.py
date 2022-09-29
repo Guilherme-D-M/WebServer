@@ -38,7 +38,7 @@ while True:
 		# um caractere '\', lemos o caminho do segundo caractere 
 		f = open(filename[1:])
 
-		# Armazene todo o conteúdo do arquivo solicitado em um buffer temporário
+		# Armazena todo o conteúdo do arquivo solicitado em um buffer temporário
 		outputdata = f.read()
 
 		# Envia a linha de cabeçalho de resposta HTTP para o soquete de conexão
