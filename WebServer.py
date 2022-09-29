@@ -1,33 +1,33 @@
-# Import socket module
+# Importa o módulo de soquete
 from socket import *    
 import sys
 
-# Create a TCP server socket
-#(AF_INET is used for IPv4 protocols)
-#(SOCK_STREAM is used for TCP)
+# Cria um socket de servidor TCP
+#(AF_INET é usado para protocolos IPv4)
+#(SOCK_STREAM é usado para TCP)
 
 serverSocket = socket(AF_INET, SOCK_STREAM)
 
-# Assign a port number
+# Atribui um número de porta
 serverPort = 9090
 
-# Bind the socket to server address and server port
+# Vincula o soquete ao endereço do servidor e porta do servidor
 serverSocket.bind(("127.0.0.1", serverPort))
 
-# Listen to at most 1 connection at a time
+# Ouve no máximo 1 conexão por vez
 serverSocket.listen(1)
 
-# Server should be up and running and listening to the incoming connections
+# O servidor vai estar funcionando e ouvindo as conexões de entrada
 while True:
 	print ('Tudo pronto...')
 	
-	# Set up a new connection from the client
+	# Configura uma nova conexão do cliente
 	connectionSocket, addr = serverSocket.accept()
 	
-	# If an exception occurs during the execution of try clause
-	# the rest of the clause is skipped
-	# If the exception type matches the word after except
-	# the except clause is executed
+	# Se ocorrer uma exceção durante a execução da cláusula try
+	# O resto da cláusula é ignorado
+	# Se o tipo de exceção corresponder à palavra após exceto
+	# A cláusula except é executada
 	try:
 		# Recebe a mensagem de solicitação do cliente
 		message =  connectionSocket.recv(1024)
@@ -41,10 +41,10 @@ while True:
 		# Armazene todo o conteúdo do arquivo solicitado em um buffer temporário
 		outputdata = f.read()
 
-		# Envie a linha de cabeçalho de resposta HTTP para o soquete de conexão
+		# Envia a linha de cabeçalho de resposta HTTP para o soquete de conexão
 		connectionSocket.sendall(bytes('HTTP/1.1 200 OK\r\n\r\n','UTF-8'))
  
-		# Envie o conteúdo do arquivo solicitado para o soquete de conexão
+		# Envia o conteúdo do arquivo solicitado para o soquete de conexão
 		for i in range(0, len(outputdata)):
 			string = outputdata[i]
 			dataBytes = string.encode("utf-8")
@@ -53,11 +53,10 @@ while True:
 			dataBytes2 = string2.encode("utf-8")
 		connectionSocket.send(dataBytes2)
 		
-		# Close the client connection socket
+		# Fecha o soquete de conexão do cliente
 		connectionSocket.close()
 	except IOError:
-		# Send HTTP response message for file not found
-		#connectionSocket.send(bytes("HTTP/1.1 404 Not Found\r\n\r\n"))
+		# Envia mensagem de resposta HTTP para arquivo não encontrado
 		string="HTTP/1.1 404 Not Found\r\n\r\n"
 		dataBytes = string.encode("utf-8")
 		connectionSocket.send(dataBytes)
@@ -65,8 +64,7 @@ while True:
 		dataBytes = string.encode("utf-8")
 		connectionSocket.send(dataBytes)
 
-		# Close the client connection socket
+		# Fecha o soquete de conexão do cliente
 		connectionSocket.close()
 	serverSocket.close()  
 	sys.exit(1)
-
